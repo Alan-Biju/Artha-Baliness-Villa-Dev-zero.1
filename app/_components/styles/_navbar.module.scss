@@ -1,0 +1,14 @@
+.sidebar_container {
+    position: fixed;
+    top: 0;
+    left: 0; /* Ensures the sidebar aligns to the left */
+    width: 430px;
+    height: 100vh;
+    background-color: red;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
