@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import styles from '../styles/_cards.module.scss'
 
 const images = [
   "/assets/wallpaper.jpg",
@@ -41,7 +42,7 @@ export default function StandardCottages() {
           >
             <ChevronLeft size={24} />
           </button>
-          <div className="w-full h-64 md:h-96 relative">
+          <div className={`${styles.image_size} w-full h-64 md:h-96 relative`}>
             <Image
               src={images[current]}
               alt="Cottage view"

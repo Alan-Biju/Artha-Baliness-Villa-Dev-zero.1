@@ -110,7 +110,7 @@ export default function Home() {
       </div>
     </div>
     <Carousel/>
-    <RotatingCards/>
+    {/* <RotatingCards/> */}
     <Cards/>
     </>
   );
