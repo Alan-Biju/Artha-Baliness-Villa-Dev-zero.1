@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const images = [
-    "/assets/wallpaper.jpg",
-    "/assets/wallpaper1.jpg",
-    "/assets/wallpaper.jpg",
-    "/assets/wallpaper1.jpg"
+  "/assets/wallpaper.jpg",
+  "/assets/wallpaper1.jpg",
+  "/assets/wallpaper.jpg",
+  "/assets/wallpaper1.jpg",
 ];
 
 export default function StandardCottages() {
@@ -27,9 +27,10 @@ export default function StandardCottages() {
       <div className="md:w-1/2 text-center md:text-left">
         <h2 className="text-3xl font-bold text-brown-800">Standard Cottages</h2>
         <p className="mt-4 text-gray-700">
-          Imagine waking up after a restful night of sleep on exquisite, soft bedding, to a private balcony
-          with a stunning view while sipping on a warm cup of coffee. With a range of amenities, our cottages
-          are designed to make you feel at home while you’re on vacation.
+          Imagine waking up after a restful night of sleep on exquisite, soft
+          bedding, to a private balcony with a stunning view while sipping on a
+          warm cup of coffee. With a range of amenities, our cottages are
+          designed to make you feel at home while you’re on vacation.
         </p>
       </div>
       <div className="relative md:w-1/2 overflow-hidden rounded-2xl shadow-lg bg-white p-4">
