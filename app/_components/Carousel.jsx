@@ -6,9 +6,9 @@ import styles from "./styles/_carousel.module.scss"; // Add styling
 
 const images = [
   "/assets/wallpaper.jpg",
-  "/assets/wallpaper1.jpg",
+  "/assets/wallpaper2.jpg",
   "/assets/wallpaper.jpg",
-  "/assets/wallpaper1.jpg",
+  "/assets/wallpaper2.jpg",
 ];
 
 export default function Carousel() {
