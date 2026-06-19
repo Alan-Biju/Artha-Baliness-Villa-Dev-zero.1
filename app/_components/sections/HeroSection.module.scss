@@ -1,0 +1,181 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ─── Background ─── */
+.bgWrapper {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 140%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(10, 30, 15, 0.65) 0%,
+    rgba(5, 15, 8, 0.55) 50%,
+    rgba(10, 25, 12, 0.70) 100%
+  );
+}
+
+/* ─── Content ─── */
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  max-width: 900px;
+}
+
+.logoWrapper {
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 640px) {
+    max-width: 180px;
+    margin-top: 5rem;
+  }
+}
+
+.label {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-400);
+  margin-bottom: 1rem;
+}
+
+.headline {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+
+  em {
+    font-style: italic;
+    color: var(--color-gold-300);
+  }
+}
+
+.divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-400), transparent);
+  transform-origin: center;
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  font-family: var(--font-jost), sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 55ch;
+  margin-bottom: 2.5rem;
+}
+
+/* ─── CTA Buttons ─── */
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btnPrimary,
+.btnWhatsApp,
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.9rem 1.85rem;
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnPrimary {
+  background: var(--color-forest-600);
+  color: #fff;
+
+  &:hover {
+    background: var(--color-forest-500);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(28, 74, 48, 0.5);
+  }
+}
+
+.btnWhatsApp {
+  background: #25D366;
+  color: #fff;
+
+  &:hover {
+    background: #1ebe59;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+  }
+}
+
+.btnOutline {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+    color: #fff;
+  }
+}
+
+/* ─── Scroll Indicator ─── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.5);
+
+  span {
+    font-family: var(--font-jost), sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 480px) {
+  .ctaGroup { flex-direction: column; width: 100%; max-width: 280px; }
+  .btnPrimary, .btnWhatsApp, .btnOutline { width: 100%; justify-content: center; }
+}

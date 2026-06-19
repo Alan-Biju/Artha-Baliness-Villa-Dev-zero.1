@@ -1,0 +1,146 @@
+.section {
+  background: var(--color-beige-50);
+  padding: 7rem clamp(1.5rem, 5vw, 5rem);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+/* ─── Story Blocks ─── */
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  &.reverse {
+    direction: rtl;
+    > * { direction: ltr; }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    direction: ltr !important;
+    > * { direction: ltr !important; }
+  }
+}
+
+/* ─── Image ─── */
+.imageWrapper {
+  position: relative;
+}
+
+.imageFrame {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(28, 74, 48, 0.15) 0%, transparent 60%);
+  }
+
+  @media (max-width: 640px) { height: 300px; }
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  z-index: 1;
+}
+
+/* Decorative border frame */
+.imageFrame::after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: -1rem;
+  bottom: -1rem;
+  border: 1px solid var(--color-gold-400);
+  z-index: 0;
+  pointer-events: none;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+.accentCard {
+  position: absolute;
+  bottom: -1.25rem;
+  right: -1.25rem;
+  background: var(--color-forest-600);
+  color: #fff;
+  padding: 1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 640px) {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+.accentIcon {
+  color: var(--color-gold-400);
+  display: flex;
+  align-items: center;
+}
+
+.accentLabel {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ─── Text ─── */
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.blockTitle {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: var(--color-forest-600);
+  line-height: 1.2;
+}
+
+.body {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--muted);
+  font-weight: 300;
+  max-width: 52ch;
+}
+
+/* ─── Bottom CTA ─── */
+.cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}

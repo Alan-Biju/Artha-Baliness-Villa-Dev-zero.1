@@ -1,0 +1,197 @@
+.section {
+  background: var(--color-beige-100);
+  padding: 7rem clamp(1.5rem, 5vw, 5rem);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* ─── Map ─── */
+.mapWrapper {
+  position: relative;
+  height: 480px;
+
+  @media (max-width: 640px) { height: 300px; }
+}
+
+.mapPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-forest-700) 0%, var(--color-forest-600) 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.05) 0%, transparent 60%);
+  }
+}
+
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.mapPin {
+  color: var(--color-gold-400);
+}
+
+.mapNote {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.mapAddress {
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.25rem;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.mapLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  background: var(--color-gold-400);
+  color: #fff;
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.725rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  &:hover { background: var(--color-gold-500); }
+}
+
+/* ─── Attractions ─── */
+.attractions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.addressCard {
+  background: #fff;
+  padding: 1.75rem;
+  border-left: 3px solid var(--color-forest-600);
+  box-shadow: var(--shadow-card);
+}
+
+.addressTitle {
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--color-forest-600);
+  margin-bottom: 0.6rem;
+}
+
+.addressText {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--muted);
+  font-weight: 300;
+  font-style: normal;
+}
+
+.travelInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-beige-300);
+}
+
+.travelItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.825rem;
+  color: var(--muted);
+  font-weight: 300;
+
+  svg { color: var(--color-forest-500); flex-shrink: 0; margin-top: 1px; }
+}
+
+.nearbyTitle {
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-forest-600);
+}
+
+.attractionList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.attractionItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-beige-300);
+
+  &:last-child { border-bottom: none; }
+}
+
+.attractionEmoji {
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.attractionName {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-charcoal-600);
+}
+
+.attractionMeta {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 300;
+}

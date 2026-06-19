@@ -1,0 +1,27 @@
+.carousel {
+  overflow: hidden;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel_inner {
+  cursor: grab;
+  overflow: hidden;
+  width: 80vw; // Adjust based on your layout
+}
+
+.carousel_track {
+  display: flex;
+  gap: 20px;
+}
+
+.carousel_item {
+  min-width: 600px; // Each image width
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}

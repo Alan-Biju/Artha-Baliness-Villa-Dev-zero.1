@@ -1,0 +1,10 @@
+.card_container{
+    width: 100vw;
+    height: 700px;
+    background: #EAE7E1;
+    .image_size{
+        @media(max-width: 600px){
+           width: 80vw;
+        }
+    }
+}

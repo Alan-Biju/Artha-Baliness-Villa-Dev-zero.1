@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─── */
+:root {
+  /* Forest green palette */
+  --color-forest-50:   #f0f7f3;
+  --color-forest-100:  #d8ece0;
+  --color-forest-500:  #2D6A45;
+  --color-forest-600:  #1C4A30;
+  --color-forest-700:  #163a26;
+
+  /* Gold palette */
+  --color-gold-300:    #f0c85a;
+  --color-gold-400:    #C9A44A;
+  --color-gold-500:    #a8832e;
+
+  /* Beige/neutral palette */
+  --color-beige-50:    #FAFAF5;
+  --color-beige-100:   #F5F0E8;
+  --color-beige-200:   #EDE6D8;
+  --color-beige-300:   #DDD6CC;
+  --color-beige-400:   #C8BFB0;
+
+  /* Charcoal */
+  --color-charcoal-400: #6b6b6b;
+  --color-charcoal-600: #1c1c1e;
+
+  /* Semantic */
+  --background:  var(--color-beige-50);
+  --foreground:  var(--color-charcoal-600);
+  --surface:     var(--color-beige-100);
+  --primary:     var(--color-forest-600);
+  --primary-light: var(--color-forest-500);
+  --accent:      var(--color-gold-400);
+  --border:      var(--color-beige-300);
+  --muted:       var(--color-charcoal-400);
+
+  /* Typography */
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-jost: "Jost", system-ui, sans-serif;
+
+  /* Spacing */
+  --section-pad-y: 6rem;
+  --section-pad-x: clamp(1.5rem, 5vw, 6rem);
+
+  /* Shadows */
+  --shadow-card:   0 4px 20px rgba(28, 74, 48, 0.08);
+  --shadow-hover:  0 12px 40px rgba(28, 74, 48, 0.18);
+  --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-fast:   all 0.2s ease-out;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-jost);
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Typography Utilities ─── */
+.font-serif   { font-family: var(--font-cormorant), serif; }
+.font-sans    { font-family: var(--font-jost), sans-serif; }
+.font-script  { font-family: var(--font-yellowtail), cursive; }
+.yellowtail-text { font-family: var(--font-yellowtail), cursive; }
+
+h1, h2, h3 {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* ─── Luxury Section Utilities ─── */
+.section-pad {
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.section-label {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-title {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--color-forest-600);
+  line-height: 1.15;
+}
+
+.section-subtitle {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 1.05rem;
+  color: var(--muted);
+  font-weight: 300;
+  max-width: 56ch;
+}
+
+/* ─── Gold Divider ─── */
+.gold-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 1rem 0;
+}
+
+/* ─── Button Utilities ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background-color: var(--primary);
+  color: #fff;
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-forest-500);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background-color: transparent;
+  color: #fff;
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background-color: rgba(255,255,255,0.15);
+  border-color: #fff;
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background-color: var(--accent);
+  color: #fff;
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  background-color: var(--color-gold-500);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 164, 74, 0.4);
+}
+
+/* ─── Scroll Animations ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ─── Image Overlay Utilities ─── */
+.img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);
+}
+
+.img-overlay-strong {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+/* ─── Glassmorphism ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-beige-100); }
+::-webkit-scrollbar-thumb { background: var(--color-beige-400); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-forest-500); }
