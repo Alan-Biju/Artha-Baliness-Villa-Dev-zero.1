@@ -1,6 +1,5 @@
 'use client';
 import { useRef } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MessageCircle, ChevronDown } from 'lucide-react';
@@ -25,15 +24,16 @@ export default function HeroSection() {
       className={styles.hero}
       aria-label="Hero — Welcome to Artha Baliness Villa"
     >
-      {/* Parallax Background Image */}
+      {/* Parallax Background Video */}
       <motion.div className={styles.bgWrapper} style={{ y: bgY }}>
-        <Image
-          src="/assets/wallpaper2.jpg"
-          alt="Artha Baliness Villa — aerial view of the resort"
-          fill
-          priority
-          sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
+        <video
+          className={styles.bgVideo}
+          src="/assets/hero-video.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/assets/wallpaper2.jpg"
         />
         <div className={styles.overlay} />
       </motion.div>
