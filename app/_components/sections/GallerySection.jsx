@@ -23,6 +23,10 @@ export default function GallerySection({ items = [] }) {
   const galleryItems = items.length > 0 ? items : FALLBACK_ITEMS;
   const [activeFilter, setActiveFilter] = useState('All');
   const [lightbox, setLightbox] = useState(null);
+  const [failedSrcs, setFailedSrcs] = useState({});
+
+  const handleImgError = (id) => setFailedSrcs((prev) => ({ ...prev, [id]: true }));
+  const getSrc = (img) => (failedSrcs[img.id || img.alt] ? '/assets/wallpaper.jpg' : img.src);
 
   const filtered = activeFilter === 'All'
     ? galleryItems
@@ -75,13 +79,14 @@ export default function GallerySection({ items = [] }) {
               onKeyDown={(e) => e.key === 'Enter' && setLightbox(img)}
             >
               <Image
-                src={img.src}
+                src={getSrc(img)}
                 alt={img.alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
                 loading="lazy"
                 className={styles.img}
+                onError={() => handleImgError(img.id || img.alt)}
               />
               <div className={styles.itemOverlay}>
                 <ZoomIn size={22} strokeWidth={1.5} />
@@ -121,7 +126,7 @@ export default function GallerySection({ items = [] }) {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={lightbox.src}
+                src={getSrc(lightbox)}
                 alt={lightbox.alt}
                 fill
                 style={{ objectFit: 'contain' }}

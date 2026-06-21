@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -25,6 +26,8 @@ const FALLBACK_EVENTS = [
 ];
 
 function EventCard({ event, index }) {
+  const [imgSrc, setImgSrc] = useState(event.image);
+
   return (
     <motion.article
       className={styles.card}
@@ -35,12 +38,13 @@ function EventCard({ event, index }) {
     >
       <div className={styles.imageWrapper}>
         <Image
-          src={event.image}
+          src={imgSrc}
           alt={`${event.title} at Artha Baliness Villa`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           style={{ objectFit: 'cover' }}
           loading="lazy"
+          onError={() => setImgSrc('/assets/wallpaper.jpg')}
         />
         <div className={styles.overlay} />
         <div className={styles.iconBadge}>{resolveIcon(event.iconName)}</div>

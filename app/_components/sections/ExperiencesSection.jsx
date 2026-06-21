@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -15,6 +16,8 @@ const FALLBACK_EXPERIENCES = [
 ];
 
 function ExperienceCard({ exp, index }) {
+  const [imgSrc, setImgSrc] = useState(exp.image);
+
   return (
     <motion.article
       className={styles.card}
@@ -25,13 +28,14 @@ function ExperienceCard({ exp, index }) {
     >
       <div className={styles.imageWrapper}>
         <Image
-          src={exp.image}
+          src={imgSrc}
           alt={`${exp.title} experience at Artha Baliness Villa`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           style={{ objectFit: 'cover', transition: 'transform 0.6s ease' }}
           loading="lazy"
           className={styles.img}
+          onError={() => setImgSrc('/assets/wallpaper.jpg')}
         />
         <div className={styles.overlay} />
         <span className={styles.label}>{exp.label}</span>

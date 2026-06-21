@@ -62,6 +62,7 @@ const FALLBACK_ROOMS = [
 
 function RoomCard({ room, index }) {
   const [hovered, setHovered] = useState(false);
+  const [imgSrc, setImgSrc] = useState(room.image);
 
   return (
     <motion.article
@@ -76,7 +77,7 @@ function RoomCard({ room, index }) {
       {/* Image */}
       <div className={styles.imageWrapper}>
         <Image
-          src={room.image}
+          src={imgSrc}
           alt={`${room.title} at Artha Baliness Villa`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -86,6 +87,7 @@ function RoomCard({ room, index }) {
             transform: hovered ? 'scale(1.07)' : 'scale(1)',
           }}
           loading="lazy"
+          onError={() => setImgSrc('/assets/wallpaper.jpg')}
         />
         <div className={styles.imageOverlay} />
 
