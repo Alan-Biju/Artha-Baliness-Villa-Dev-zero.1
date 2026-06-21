@@ -3,23 +3,38 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Wifi, Coffee, Bath, Users, TreePine, Eye, ArrowRight } from 'lucide-react';
+import { Wifi, Coffee, Bath, Users, TreePine, Eye, Utensils, Car, Dumbbell, Wind, ArrowRight } from 'lucide-react';
 import styles from './AccommodationsSection.module.scss';
 
-const rooms = [
+const AMENITY_ICONS = {
+  'wifi': <Wifi size={14} />, 'free wifi': <Wifi size={14} />,
+  'breakfast': <Coffee size={14} />, 'coffee': <Coffee size={14} />, 'kitchenette': <Coffee size={14} />,
+  'private bath': <Bath size={14} />, 'bath': <Bath size={14} />, 'rain shower': <Bath size={14} />,
+  'forest view': <Eye size={14} />, 'view': <Eye size={14} />,
+  'family friendly': <Users size={14} />, 'family rooms': <Users size={14} />, 'occupancy': <Users size={14} />,
+  'private garden': <TreePine size={14} />, 'courtyard': <TreePine size={14} />, 'garden': <TreePine size={14} />,
+  'dining': <Utensils size={14} />, 'restaurant': <Utensils size={14} />,
+  'parking': <Car size={14} />,
+  'gym': <Dumbbell size={14} />,
+  'ac': <Wind size={14} />, 'air conditioning': <Wind size={14} />,
+};
+
+function getAmenityIcon(label) {
+  const key = label.toLowerCase();
+  for (const [k, icon] of Object.entries(AMENITY_ICONS)) {
+    if (key.includes(k)) return icon;
+  }
+  return <Wifi size={14} />;
+}
+
+const FALLBACK_ROOMS = [
   {
     id: 'presidential-suite',
     title: 'Presidential Suite',
     tag: 'Most Popular',
-    description:
-      'Treat yourself and your loved one to our contemporarily designed Presidential Suite. Distinguished furniture, a private balcony, and panoramic forest views create an unrivalled space for connection.',
+    description: 'Treat yourself and your loved one to our contemporarily designed Presidential Suite. Distinguished furniture, a private balcony, and panoramic forest views create an unrivalled space for connection.',
     image: '/assets/wallpaper2.jpg',
-    amenities: [
-      { icon: <Wifi size={14} />, label: 'Free WiFi' },
-      { icon: <Coffee size={14} />, label: 'Breakfast' },
-      { icon: <Bath size={14} />, label: 'Private Bath' },
-      { icon: <Eye size={14} />, label: 'Forest View' },
-    ],
+    amenities: ['Free WiFi', 'Breakfast', 'Private Bath', 'Forest View'],
     occupancy: '2 Adults',
     size: '1,200 sq ft',
   },
@@ -27,15 +42,9 @@ const rooms = [
     id: 'luxury-cottage',
     title: 'Luxury Cottage',
     tag: 'Nature Retreat',
-    description:
-      "Wake after a restful night on exquisite bedding to a private balcony with stunning views, a warm cup of coffee in hand. Our cottages are designed to make you feel perfectly at home.",
+    description: "Wake after a restful night on exquisite bedding to a private balcony with stunning views, a warm cup of coffee in hand. Our cottages are designed to make you feel perfectly at home.",
     image: '/assets/wallpaper.jpg',
-    amenities: [
-      { icon: <Wifi size={14} />, label: 'Free WiFi' },
-      { icon: <TreePine size={14} />, label: 'Private Garden' },
-      { icon: <Bath size={14} />, label: 'Rain Shower' },
-      { icon: <Users size={14} />, label: 'Family Friendly' },
-    ],
+    amenities: ['Free WiFi', 'Private Garden', 'Rain Shower', 'Family Friendly'],
     occupancy: '2–4 Adults',
     size: '950 sq ft',
   },
@@ -43,15 +52,9 @@ const rooms = [
     id: 'family-villa',
     title: 'Family Villa',
     tag: 'Spacious',
-    description:
-      'Designed with families in mind, our villas offer two spacious bedrooms, a living area, and a private courtyard surrounded by lush greenery — the perfect setting for memorable family getaways.',
+    description: 'Designed with families in mind, our villas offer two spacious bedrooms, a living area, and a private courtyard surrounded by lush greenery — the perfect setting for memorable family getaways.',
     image: '/assets/wallpaper2.jpg',
-    amenities: [
-      { icon: <Wifi size={14} />, label: 'Free WiFi' },
-      { icon: <Coffee size={14} />, label: 'Kitchenette' },
-      { icon: <Users size={14} />, label: 'Family Rooms' },
-      { icon: <TreePine size={14} />, label: 'Courtyard' },
-    ],
+    amenities: ['Free WiFi', 'Kitchenette', 'Family Rooms', 'Courtyard'],
     occupancy: '4–6 Adults',
     size: '1,600 sq ft',
   },
@@ -107,9 +110,9 @@ function RoomCard({ room, index }) {
         {/* Amenities */}
         <ul className={styles.amenities}>
           {room.amenities.map((a) => (
-            <li key={a.label} className={styles.amenityItem}>
-              <span className={styles.amenityIcon}>{a.icon}</span>
-              {a.label}
+            <li key={a} className={styles.amenityItem}>
+              <span className={styles.amenityIcon}>{getAmenityIcon(a)}</span>
+              {a}
             </li>
           ))}
         </ul>
@@ -124,7 +127,8 @@ function RoomCard({ room, index }) {
   );
 }
 
-export default function AccommodationsSection() {
+export default function AccommodationsSection({ rooms: dynamicRooms = [] }) {
+  const rooms = dynamicRooms.length > 0 ? dynamicRooms : FALLBACK_ROOMS;
   return (
     <section id="accommodations" className={styles.section}>
       {/* Header */}
@@ -143,7 +147,6 @@ export default function AccommodationsSection() {
         </p>
       </motion.div>
 
-      {/* Room Cards Grid */}
       <div className={styles.grid}>
         {rooms.map((room, i) => (
           <RoomCard key={room.id} room={room} index={i} />

@@ -14,14 +14,25 @@ const footerLinks = [
   { name: 'FAQ',         path: '/#faq' },
 ];
 
-const contact = {
+const DEFAULTS = {
   phone: '+91 9999 999 999',
   email: 'reservations@arthabalivillaresort.com',
-  whatsapp: 'https://wa.me/919999999999?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Artha%20Baliness%20Villa',
-  address: ['Artha Baliness Villa', 'Nature\'s Lap, Karnataka', 'India — 571236'],
+  whatsapp: '+91 9999 999 999',
+  address: "Artha Baliness Villa, Nature's Lap, Karnataka, India — 571236",
+  instagram: 'https://instagram.com',
+  facebook: 'https://facebook.com',
 };
 
-export default function Footer() {
+export default function Footer({ settings = {} }) {
+  const phone    = settings.phone    || DEFAULTS.phone;
+  const email    = settings.email    || DEFAULTS.email;
+  const whatsapp = settings.whatsapp || DEFAULTS.whatsapp;
+  const address  = settings.address  || DEFAULTS.address;
+  const instagram = settings.instagram || DEFAULTS.instagram;
+  const facebook  = settings.facebook  || DEFAULTS.facebook;
+
+  const waNumber = whatsapp.replace(/\D/g, '');
+  const waLink = `https://wa.me/${waNumber}?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Artha%20Baliness%20Villa`;
   return (
     <footer className={styles.footer} role="contentinfo">
       <div className={styles.top}>
@@ -39,7 +50,7 @@ export default function Footer() {
           </p>
           <div className={styles.social}>
             <a
-              href="https://instagram.com"
+              href={instagram}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow us on Instagram"
@@ -48,7 +59,7 @@ export default function Footer() {
               <Instagram size={18} strokeWidth={1.5} />
             </a>
             <a
-              href="https://facebook.com"
+              href={facebook}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow us on Facebook"
@@ -79,25 +90,21 @@ export default function Footer() {
           <h3 className={styles.columnTitle}>Contact</h3>
           <ul className={styles.contactList}>
             <li>
-              <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className={styles.contactItem}>
+              <a href={`tel:${phone.replace(/\s/g, '')}`} className={styles.contactItem}>
                 <Phone size={14} strokeWidth={1.5} />
-                <span>{contact.phone}</span>
+                <span>{phone}</span>
               </a>
             </li>
             <li>
-              <a href={`mailto:${contact.email}`} className={styles.contactItem}>
+              <a href={`mailto:${email}`} className={styles.contactItem}>
                 <Mail size={14} strokeWidth={1.5} />
-                <span>{contact.email}</span>
+                <span>{email}</span>
               </a>
             </li>
             <li>
               <div className={styles.contactItem}>
                 <MapPin size={14} strokeWidth={1.5} style={{ flexShrink: 0, marginTop: '2px' }} />
-                <address style={{ fontStyle: 'normal' }}>
-                  {contact.address.map((line, i) => (
-                    <span key={i} style={{ display: 'block' }}>{line}</span>
-                  ))}
-                </address>
+                <address style={{ fontStyle: 'normal' }}>{address}</address>
               </div>
             </li>
           </ul>
@@ -110,7 +117,7 @@ export default function Footer() {
             Ready to experience paradise? Reach out to us directly — we&apos;re happy to help you plan the perfect getaway.
           </p>
           <a
-            href={contact.whatsapp}
+            href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.whatsappBtn}
@@ -118,10 +125,7 @@ export default function Footer() {
           >
             WhatsApp Us
           </a>
-          <a
-            href="/contact"
-            className={styles.enquiryBtn}
-          >
+          <a href="/contact" className={styles.enquiryBtn}>
             Send Inquiry
           </a>
         </div>

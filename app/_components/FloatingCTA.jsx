@@ -4,9 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Phone, ChevronUp } from 'lucide-react';
 import styles from './styles/_floatingCTA.module.scss';
 
-export default function FloatingCTA() {
+export default function FloatingCTA({ settings = {} }) {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const phone = settings.phone || '+91 9999 999 999';
+  const waNumber = (settings.whatsapp || phone).replace(/\D/g, '');
+  const waLink = `https://wa.me/${waNumber}?text=Hello%2C%20I%20am%20interested%20in%20staying%20at%20Artha%20Baliness%20Villa`;
+  const telLink = `tel:+${waNumber}`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +56,7 @@ export default function FloatingCTA() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.8 }}
                 transition={{ duration: 0.25, delay: 0.05 }}
-                href="https://wa.me/919999999999?text=Hello%2C%20I%20am%20interested%20in%20staying%20at%20Artha%20Baliness%20Villa"
+                href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.whatsappBtn}
@@ -68,7 +73,7 @@ export default function FloatingCTA() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.8 }}
                 transition={{ duration: 0.25 }}
-                href="tel:+919999999999"
+                href={telLink}
                 className={styles.callBtn}
                 aria-label="Call us"
               >

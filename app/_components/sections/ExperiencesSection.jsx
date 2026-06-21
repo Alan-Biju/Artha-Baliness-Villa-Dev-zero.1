@@ -5,55 +5,13 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import styles from './ExperiencesSection.module.scss';
 
-const experiences = [
-  {
-    id: 'nature-walks',
-    title: 'Nature Walks',
-    label: 'Guided',
-    description: 'Discover the hidden flora, fauna and secrets of the estate on guided morning nature trails led by expert naturalists.',
-    highlights: ['2–4 km forest trail', 'Expert naturalist guide', 'Bird identification sessions'],
-    image: '/assets/wallpaper.jpg',
-  },
-  {
-    id: 'trekking',
-    title: 'Trekking',
-    label: 'Adventure',
-    description: 'Conquer scenic mountain trails with our curated trekking experiences, suitable for beginners and seasoned trekkers alike.',
-    highlights: ['Multiple difficulty levels', 'Safety equipment provided', 'Waterfall & viewpoint stops'],
-    image: '/assets/wallpaper2.jpg',
-  },
-  {
-    id: 'cycling',
-    title: 'Cycling Tours',
-    label: 'Active',
-    description: 'Pedal through winding plantation roads, breathe in the crisp mountain air, and discover hidden village gems.',
-    highlights: ['Resort & estate bicycles', 'Village heritage routes', 'Sunrise & sunset tours'],
-    image: '/assets/wallpaper.jpg',
-  },
-  {
-    id: 'campfire-nights',
-    title: 'Campfire Nights',
-    label: 'Signature',
-    description: 'As the stars emerge, gather around a crackling campfire, share stories, enjoy local music and roasted specialties.',
-    highlights: ['Live folk music', 'Artisan s\'mores & snacks', 'Storytelling sessions'],
-    image: '/assets/wallpaper2.jpg',
-  },
-  {
-    id: 'wellness',
-    title: 'Wellness Sessions',
-    label: 'Rejuvenating',
-    description: 'From sunrise yoga to forest bathing and traditional Ayurvedic treatments, our wellness programme restores body and mind.',
-    highlights: ['Expert yoga instructors', 'Ayurvedic spa treatments', 'Meditation & breathwork'],
-    image: '/assets/wallpaper.jpg',
-  },
-  {
-    id: 'sightseeing',
-    title: 'Local Sightseeing',
-    label: 'Cultural',
-    description: 'Explore nearby temples, waterfalls, spice gardens and bustling local markets on expertly guided cultural excursions.',
-    highlights: ['Curated day tours', 'Resort vehicle available', 'Local expert guides'],
-    image: '/assets/wallpaper2.jpg',
-  },
+const FALLBACK_EXPERIENCES = [
+  { id: 'nature-walks', title: 'Nature Walks', label: 'Guided', description: 'Discover the hidden flora, fauna and secrets of the estate on guided morning nature trails led by expert naturalists.', highlights: ['2–4 km forest trail', 'Expert naturalist guide', 'Bird identification sessions'], image: '/assets/wallpaper.jpg' },
+  { id: 'trekking', title: 'Trekking', label: 'Adventure', description: 'Conquer scenic mountain trails with our curated trekking experiences, suitable for beginners and seasoned trekkers alike.', highlights: ['Multiple difficulty levels', 'Safety equipment provided', 'Waterfall & viewpoint stops'], image: '/assets/wallpaper2.jpg' },
+  { id: 'cycling', title: 'Cycling Tours', label: 'Active', description: 'Pedal through winding plantation roads, breathe in the crisp mountain air, and discover hidden village gems.', highlights: ['Resort & estate bicycles', 'Village heritage routes', 'Sunrise & sunset tours'], image: '/assets/wallpaper.jpg' },
+  { id: 'campfire-nights', title: 'Campfire Nights', label: 'Signature', description: 'As the stars emerge, gather around a crackling campfire, share stories, enjoy local music and roasted specialties.', highlights: ['Live folk music', "Artisan s'mores & snacks", 'Storytelling sessions'], image: '/assets/wallpaper2.jpg' },
+  { id: 'wellness', title: 'Wellness Sessions', label: 'Rejuvenating', description: 'From sunrise yoga to forest bathing and traditional Ayurvedic treatments, our wellness programme restores body and mind.', highlights: ['Expert yoga instructors', 'Ayurvedic spa treatments', 'Meditation & breathwork'], image: '/assets/wallpaper.jpg' },
+  { id: 'sightseeing', title: 'Local Sightseeing', label: 'Cultural', description: 'Explore nearby temples, waterfalls, spice gardens and bustling local markets on expertly guided cultural excursions.', highlights: ['Curated day tours', 'Resort vehicle available', 'Local expert guides'], image: '/assets/wallpaper2.jpg' },
 ];
 
 function ExperienceCard({ exp, index }) {
@@ -101,7 +59,8 @@ function ExperienceCard({ exp, index }) {
   );
 }
 
-export default function ExperiencesSection() {
+export default function ExperiencesSection({ experiences: dynamicData = [] }) {
+  const experiences = dynamicData.length > 0 ? dynamicData : FALLBACK_EXPERIENCES;
   return (
     <section id="experiences" className={styles.section}>
       <motion.div

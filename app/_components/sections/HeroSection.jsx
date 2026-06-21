@@ -1,22 +1,38 @@
 'use client';
 import { useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MessageCircle, ChevronDown } from 'lucide-react';
 import styles from './HeroSection.module.scss';
 
-export default function HeroSection() {
+const DEFAULTS = {
+  label: 'Luxury Nature Resort',
+  headline1: 'Where Luxury',
+  headline2: 'Meets Serenity',
+  description: "Designed for your utmost comfort, a stay in one of our luxury cottages is guaranteed to bring you closer to Mother Nature's soul than you have ever been.",
+  whatsapp: '919999999999',
+};
+
+export default function HeroSection({ settings = {} }) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   });
 
-  // Parallax: background drifts upward at 40% of scroll speed
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
-  // Content fades and rises on scroll
   const contentY = useTransform(scrollYProgress, [0, 0.6], ['0%', '18%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
+
+  const label = settings.hero_subheadline || DEFAULTS.label;
+  const headline = settings.hero_headline || `${DEFAULTS.headline1} ${DEFAULTS.headline2}`;
+  const description = settings.hero_description || DEFAULTS.description;
+  const waNumber = (settings.whatsapp || DEFAULTS.whatsapp).replace(/\D/g, '');
+  const waLink = `https://wa.me/${waNumber}?text=Hello%2C%20I%20am%20interested%20in%20staying%20at%20Artha%20Baliness%20Villa`;
+
+  const [headlinePart1, ...rest] = headline.split(' ');
+  const headlinePart2 = rest.join(' ');
 
   return (
     <section
@@ -67,7 +83,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, letterSpacing: '0.2em' }}
           transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
         >
-          Luxury Nature Resort
+          {label}
         </motion.p>
 
         {/* Headline */}
@@ -77,9 +93,9 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut', delay: 0.7 }}
         >
-          Where Luxury
+          {headlinePart1}
           <br />
-          <em>Meets Serenity</em>
+          <em>{headlinePart2}</em>
         </motion.h1>
 
         {/* Gold divider */}
@@ -97,8 +113,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 1.1 }}
         >
-          Designed for your utmost comfort, a stay in one of our luxury cottages
-          is guaranteed to bring you closer to Mother Nature&apos;s soul than you have ever been.
+          {description}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -112,7 +127,7 @@ export default function HeroSection() {
             Explore Resort
           </Link>
           <a
-            href="https://wa.me/919999999999?text=Hello%2C%20I%20am%20interested%20in%20staying%20at%20Artha%20Baliness%20Villa"
+            href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btnWhatsApp}

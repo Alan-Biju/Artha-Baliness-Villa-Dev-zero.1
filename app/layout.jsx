@@ -1,6 +1,7 @@
 import { Cormorant_Garamond, Jost, Yellowtail } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from './_helper/ClientWrapper';
+import { fetchSettings } from '../lib/api';
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -110,7 +111,9 @@ const structuredData = {
   priceRange: "$$$",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const settings = await fetchSettings();
+
   return (
     <html
       lang="en"
@@ -123,7 +126,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <ClientWrapper>{children}</ClientWrapper>
+        <ClientWrapper settings={settings}>{children}</ClientWrapper>
       </body>
     </html>
   );

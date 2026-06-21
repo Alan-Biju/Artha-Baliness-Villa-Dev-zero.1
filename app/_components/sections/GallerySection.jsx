@@ -7,19 +7,20 @@ import styles from './GallerySection.module.scss';
 
 const categories = ['All', 'Rooms', 'Resort', 'Nature', 'Activities', 'Dining'];
 
-const galleryItems = [
-  { src: '/assets/wallpaper2.jpg', alt: 'Luxury cottage exterior', cat: 'Rooms',      span: 'large' },
-  { src: '/assets/wallpaper.jpg',  alt: 'Resort pool at sunset',   cat: 'Resort',     span: 'normal' },
-  { src: '/assets/wallpaper2.jpg', alt: 'Forest trail',            cat: 'Nature',     span: 'normal' },
-  { src: '/assets/wallpaper.jpg',  alt: 'Trekking activity',       cat: 'Activities', span: 'normal' },
-  { src: '/assets/wallpaper2.jpg', alt: 'Outdoor dining',          cat: 'Dining',     span: 'large' },
-  { src: '/assets/wallpaper.jpg',  alt: 'Suite interior',          cat: 'Rooms',      span: 'normal' },
-  { src: '/assets/wallpaper2.jpg', alt: 'Garden pathway',          cat: 'Nature',     span: 'normal' },
-  { src: '/assets/wallpaper.jpg',  alt: 'Resort aerial view',      cat: 'Resort',     span: 'normal' },
-  { src: '/assets/wallpaper2.jpg', alt: 'Campfire evening',        cat: 'Activities', span: 'normal' },
+const FALLBACK_ITEMS = [
+  { id: '1', src: '/assets/wallpaper2.jpg', alt: 'Luxury cottage exterior', cat: 'Rooms',      span: 'large' },
+  { id: '2', src: '/assets/wallpaper.jpg',  alt: 'Resort pool at sunset',   cat: 'Resort',     span: 'normal' },
+  { id: '3', src: '/assets/wallpaper2.jpg', alt: 'Forest trail',            cat: 'Nature',     span: 'normal' },
+  { id: '4', src: '/assets/wallpaper.jpg',  alt: 'Trekking activity',       cat: 'Activities', span: 'normal' },
+  { id: '5', src: '/assets/wallpaper2.jpg', alt: 'Outdoor dining',          cat: 'Dining',     span: 'large' },
+  { id: '6', src: '/assets/wallpaper.jpg',  alt: 'Suite interior',          cat: 'Rooms',      span: 'normal' },
+  { id: '7', src: '/assets/wallpaper2.jpg', alt: 'Garden pathway',          cat: 'Nature',     span: 'normal' },
+  { id: '8', src: '/assets/wallpaper.jpg',  alt: 'Resort aerial view',      cat: 'Resort',     span: 'normal' },
+  { id: '9', src: '/assets/wallpaper2.jpg', alt: 'Campfire evening',        cat: 'Activities', span: 'normal' },
 ];
 
-export default function GallerySection() {
+export default function GallerySection({ items = [] }) {
+  const galleryItems = items.length > 0 ? items : FALLBACK_ITEMS;
   const [activeFilter, setActiveFilter] = useState('All');
   const [lightbox, setLightbox] = useState(null);
 
@@ -56,14 +57,11 @@ export default function GallerySection() {
       </div>
 
       {/* Masonry Grid */}
-      <motion.div
-        className={styles.grid}
-        layout
-      >
+      <motion.div className={styles.grid} layout>
         <AnimatePresence mode="popLayout">
           {filtered.map((img, i) => (
             <motion.div
-              key={img.alt}
+              key={img.id || img.alt}
               className={`${styles.item} ${img.span === 'large' ? styles.large : ''}`}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}

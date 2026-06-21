@@ -4,58 +4,25 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 import styles from './TestimonialsSection.module.scss';
 
-const testimonials = [
-  {
-    id: 1,
-    name: 'Priya & Rahul Sharma',
-    origin: 'Mumbai, India',
-    rating: 5,
-    text: "Our anniversary stay at Artha was beyond words. The cottage was immaculate, the views breathtaking, and the staff remembered every small detail we mentioned. We have already planned our return trip. Truly a world-class experience.",
-    stay: 'Presidential Suite · 5 Nights',
-  },
-  {
-    id: 2,
-    name: 'David & Sarah Mitchell',
-    origin: 'London, UK',
-    rating: 5,
-    text: "We have stayed at luxury resorts across the world, and Artha Baliness Villa stands out for the sheer authenticity of its hospitality. The guided nature walk was a highlight — our naturalist guide was extraordinary.",
-    stay: 'Luxury Cottage · 3 Nights',
-  },
-  {
-    id: 3,
-    name: 'The Krishnamurthy Family',
-    origin: 'Bengaluru, India',
-    rating: 5,
-    text: "Perfect for families. The kids absolutely loved the campfire evening and the nature trail. The staff were warm, attentive and genuinely cared about making every moment special. We will be back every year.",
-    stay: 'Family Villa · 4 Nights',
-  },
-  {
-    id: 4,
-    name: 'Amélie Fontaine',
-    origin: 'Paris, France',
-    rating: 5,
-    text: "A magical place that captures the essence of luxury and nature in perfect harmony. The sunrise yoga, the spa treatments, and the outdoor dining under the stars — each experience was thoughtfully curated.",
-    stay: 'Luxury Cottage · 7 Nights',
-  },
+const FALLBACK = [
+  { id: 1, name: 'Priya & Rahul Sharma', origin: 'Mumbai, India', rating: 5, text: "Our anniversary stay at Artha was beyond words. The cottage was immaculate, the views breathtaking, and the staff remembered every small detail we mentioned. We have already planned our return trip. Truly a world-class experience.", stay: 'Presidential Suite · 5 Nights' },
+  { id: 2, name: 'David & Sarah Mitchell', origin: 'London, UK', rating: 5, text: "We have stayed at luxury resorts across the world, and Artha Baliness Villa stands out for the sheer authenticity of its hospitality. The guided nature walk was a highlight — our naturalist guide was extraordinary.", stay: 'Luxury Cottage · 3 Nights' },
+  { id: 3, name: 'The Krishnamurthy Family', origin: 'Bengaluru, India', rating: 5, text: "Perfect for families. The kids absolutely loved the campfire evening and the nature trail. The staff were warm, attentive and genuinely cared about making every moment special. We will be back every year.", stay: 'Family Villa · 4 Nights' },
+  { id: 4, name: 'Amélie Fontaine', origin: 'Paris, France', rating: 5, text: "A magical place that captures the essence of luxury and nature in perfect harmony. The sunrise yoga, the spa treatments, and the outdoor dining under the stars — each experience was thoughtfully curated.", stay: 'Luxury Cottage · 7 Nights' },
 ];
 
 function StarRating({ rating }) {
   return (
     <div className={styles.stars} aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          size={14}
-          fill={i < rating ? 'currentColor' : 'none'}
-          strokeWidth={1.5}
-          style={{ color: 'var(--color-gold-400)' }}
-        />
+        <Star key={i} size={14} fill={i < rating ? 'currentColor' : 'none'} strokeWidth={1.5} style={{ color: 'var(--color-gold-400)' }} />
       ))}
     </div>
   );
 }
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ testimonials: dynamicData = [] }) {
+  const testimonials = dynamicData.length > 0 ? dynamicData : FALLBACK;
   const [active, setActive] = useState(0);
 
   const prev = () => setActive((p) => (p === 0 ? testimonials.length - 1 : p - 1));

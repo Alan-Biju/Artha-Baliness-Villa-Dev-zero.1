@@ -2,38 +2,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Heart, Briefcase, Users, Cake, ArrowRight } from 'lucide-react';
+import { Heart, Briefcase, Users, Cake, Star, ArrowRight } from 'lucide-react';
 import styles from './EventsSection.module.scss';
 
-const events = [
-  {
-    icon: <Heart size={28} strokeWidth={1.3} />,
-    title: 'Weddings & Ceremonies',
-    description: 'Say your vows surrounded by nature. Our dedicated event team crafts bespoke ceremonies, from intimate garden weddings to grand celebrations.',
-    features: ['Capacity: up to 300 guests', 'Decor & floral services', 'Catering & bar packages', 'Honeymoon suite included'],
-    image: '/assets/wallpaper2.jpg',
-  },
-  {
-    icon: <Briefcase size={28} strokeWidth={1.3} />,
-    title: 'Corporate Retreats',
-    description: 'Reconnect your team in nature. Our resort provides the perfect backdrop for strategy offsites, team-building workshops, and executive retreats.',
-    features: ['Conference facilities', 'AV equipment', 'Team-building activities', 'Customised menus'],
-    image: '/assets/wallpaper.jpg',
-  },
-  {
-    icon: <Users size={28} strokeWidth={1.3} />,
-    title: 'Family Gatherings',
-    description: 'Create lasting memories with the people who matter most. Our family event packages ensure every age group has a wonderful time.',
-    features: ['Multi-villa bookings', 'Kids activities', 'Family dining menus', 'Pool & garden access'],
-    image: '/assets/wallpaper2.jpg',
-  },
-  {
-    icon: <Cake size={28} strokeWidth={1.3} />,
-    title: 'Milestone Celebrations',
-    description: 'Birthdays, anniversaries, and life milestones deserve a setting as extraordinary as the occasion. We create tailored celebrations, perfectly.',
-    features: ['Custom décor & themes', 'Personalised cakes', 'Photography services', 'Private dining options'],
-    image: '/assets/wallpaper.jpg',
-  },
+const ICON_MAP = {
+  Heart: <Heart size={28} strokeWidth={1.3} />,
+  Briefcase: <Briefcase size={28} strokeWidth={1.3} />,
+  Users: <Users size={28} strokeWidth={1.3} />,
+  Cake: <Cake size={28} strokeWidth={1.3} />,
+  Star: <Star size={28} strokeWidth={1.3} />,
+};
+
+function resolveIcon(name) {
+  return ICON_MAP[name] || ICON_MAP.Star;
+}
+
+const FALLBACK_EVENTS = [
+  { id: 'weddings', iconName: 'Heart', title: 'Weddings & Ceremonies', description: 'Say your vows surrounded by nature. Our dedicated event team crafts bespoke ceremonies, from intimate garden weddings to grand celebrations.', features: ['Capacity: up to 300 guests', 'Decor & floral services', 'Catering & bar packages', 'Honeymoon suite included'], image: '/assets/wallpaper2.jpg' },
+  { id: 'corporate', iconName: 'Briefcase', title: 'Corporate Retreats', description: 'Reconnect your team in nature. Our resort provides the perfect backdrop for strategy offsites, team-building workshops, and executive retreats.', features: ['Conference facilities', 'AV equipment', 'Team-building activities', 'Customised menus'], image: '/assets/wallpaper.jpg' },
+  { id: 'family', iconName: 'Users', title: 'Family Gatherings', description: 'Create lasting memories with the people who matter most. Our family event packages ensure every age group has a wonderful time.', features: ['Multi-villa bookings', 'Kids activities', 'Family dining menus', 'Pool & garden access'], image: '/assets/wallpaper2.jpg' },
+  { id: 'milestone', iconName: 'Cake', title: 'Milestone Celebrations', description: 'Birthdays, anniversaries, and life milestones deserve a setting as extraordinary as the occasion. We create tailored celebrations, perfectly.', features: ['Custom décor & themes', 'Personalised cakes', 'Photography services', 'Private dining options'], image: '/assets/wallpaper.jpg' },
 ];
 
 function EventCard({ event, index }) {
@@ -55,7 +43,7 @@ function EventCard({ event, index }) {
           loading="lazy"
         />
         <div className={styles.overlay} />
-        <div className={styles.iconBadge}>{event.icon}</div>
+        <div className={styles.iconBadge}>{resolveIcon(event.iconName)}</div>
       </div>
 
       <div className={styles.content}>
@@ -77,7 +65,8 @@ function EventCard({ event, index }) {
   );
 }
 
-export default function EventsSection() {
+export default function EventsSection({ events: dynamicData = [] }) {
+  const events = dynamicData.length > 0 ? dynamicData : FALLBACK_EVENTS;
   return (
     <section id="events" className={styles.section}>
       <motion.div
@@ -97,7 +86,7 @@ export default function EventsSection() {
 
       <div className={styles.grid}>
         {events.map((ev, i) => (
-          <EventCard key={ev.title} event={ev} index={i} />
+          <EventCard key={ev.id || ev.title} event={ev} index={i} />
         ))}
       </div>
 
